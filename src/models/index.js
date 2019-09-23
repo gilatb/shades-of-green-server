@@ -33,10 +33,12 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-// User.belongsToMany(Place, {through: Vote}); // TODO:
-// Place.belongsToMany(User, {through: Vote}); // TODO: 
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// another option to implement associations: 
+// User.belongsToMany(Place, {through: Vote}); 
+// Place.belongsToMany(User, {through: Vote}); 

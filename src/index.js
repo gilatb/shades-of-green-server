@@ -11,9 +11,6 @@ db.sequelize.authenticate()
   .catch(err => console.error(err));
 
 
-// define the port where the server listens
-
-
 app.use(cors())
 .use(express.json())
 .use(router);

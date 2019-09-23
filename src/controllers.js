@@ -26,15 +26,17 @@ exports.getPlaces = async (req, res, next) => {
 exports.addVote = async (req, res) => {
   try {
     const { place_google_id, score, user_id } = req.body
-    const place = await db.Places.findOne({ where: { google_id: place_google_id } })
-    if (!place) await db.Places.create({ google_id: place_google_id})
+    let place = await db.Places.findOne({ where: { google_id: place_google_id } })
+    if (!place) {
+      place = await db.Places.create({ google_id: place_google_id})
+    }
     const vote = await db.Votes.create({
       PlaceGoogleId: place_google_id,
       UserId: user_id,
       score
     });
-    const updatedSumNTotal = await db.Places.update({ total_score: place.total_score + score, num_of_votes: place.num_of_votes + 1 }, { where: { google_id: place_google_id} });
-    const updatedScore = await db.Places.update({ average_score: updatedSumNTotal.total_score / updatedSumNTotal.num_of_votes }, { where: { google_id: place_google_id } });
+    const [_, [updatedSumNTotal]] = await db.Places.update({ total_score: place.total_score + score, num_of_votes: place.num_of_votes + 1 }, { where: { google_id: place_google_id }, returning: true });
+    const updatedScore = await db.Places.update({ average_score: updatedSumNTotal.total_score / updatedSumNTotal.num_of_votes }, { where: { google_id: place_google_id }, returning: true });
     res.send(updatedScore)
   } catch (e) {
     console.error(e);

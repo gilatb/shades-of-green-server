@@ -2,14 +2,6 @@
 
 module.exports = (sequelize, DataType) => {
   const Vote = sequelize.define('Votes', {
-    // user_id: {
-    //   type: DataType.INTEGER,
-    //   allowNull: false
-    // },
-    // place_id: {
-    //   type: DataType.INTEGER,
-    //   allowNull: false
-    // },
     score: {
       type: DataType.FLOAT,
       allowNull: false

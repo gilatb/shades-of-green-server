@@ -8,11 +8,5 @@ module.exports = (sequelize, DataType) => {
     }
   });
 
-  // User.associate = (db) => {
-  //   console.log(db);
-    
-  //   db.Users.hasMany(db.Vote)
-  // }
-
   return User;
 }

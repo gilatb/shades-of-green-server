@@ -10,10 +10,9 @@ router.get('/places', cntrl.getPlaces)
 
 // post a new vote 
 // 👍🏻 total_score + num_of_votes 
-// 👎🏻 update the average_score
 router.post('/vote', cntrl.addVote)
 
 // 👍🏻 get a vote from a place
 router.get('/place', cntrl.getCurrentScore)
- 
+
 module.exports = router;
